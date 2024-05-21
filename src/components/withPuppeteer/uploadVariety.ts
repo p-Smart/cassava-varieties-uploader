@@ -1,18 +1,23 @@
 import { Page } from "puppeteer-core"
 import { IVariety } from "../types";
+import { Request } from "express";
 
 
-interface IUploadVariety {
+interface IUploadVarietyPup {
   page: Page;
   variety: IVariety;
   count?: number;
+
+  req: Request;
 }
 
-const uploadVariety = async ({
+const uploadVarietyPup = async ({
     page,
     variety,
     count,
-}: IUploadVariety) => {
+
+    req,
+}: IUploadVarietyPup) => {
     await page.goto('https://seedtracker.org/newcassava/wp-admin/post-new.php?post_type=variety')
 
     await Promise.race([
@@ -69,8 +74,8 @@ const uploadVariety = async ({
 
   await page.waitForNavigation()
 
-  console.log(`${count || 0}. Uploaded ${variety['Original Name']}`)
+  console.log(`${count || 0}. Uploaded ${variety['Original Name']}`, {cacheId: req.body.reqId})
 }
 
 
-export default uploadVariety
+export default uploadVarietyPup

@@ -2,15 +2,19 @@ import axios from "axios";
 import { JSDOM } from "jsdom";
 import cookieArrToString from "../../utils/cookieArrToString";
 import { IVariety } from "../types";
+import { Request } from "express";
 
-interface IUploadVariety {
+interface IUploadVarietyAxios {
   loginCookies: string;
   variety: IVariety;
+  req: Request;
 }
-const uploadVariety = async ({
+const uploadVarietyAxios = async ({
     loginCookies,
     variety,
-}: IUploadVariety) => {
+
+    req
+}: IUploadVarietyAxios) => {
   if(!loginCookies){
     throw new Error('Login cookies need to be passed')
   }
@@ -87,8 +91,10 @@ const uploadVariety = async ({
     }
   })
 
-  console.log(`${variety["Variety Name"]} uploaded.`)
+  const responseMessage = `${variety["Variety Name"]} uploaded.`
+
+  console.log(responseMessage, {cacheId: req.body.reqId})
 }
 
 
-export default uploadVariety
+export default uploadVarietyAxios

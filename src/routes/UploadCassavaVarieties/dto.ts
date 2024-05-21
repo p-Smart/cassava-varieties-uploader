@@ -76,7 +76,7 @@ const UploadCassavaVarietiesDto = [
             }
             
             const headers = Object.values(data[0] as {[key: string]: any})
-            
+
             const formattedData = data.slice(1).map(row => {
                 const rowObject = {}
                 Object.keys(row).forEach((rowKey, index) => {

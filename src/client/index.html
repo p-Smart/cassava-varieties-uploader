@@ -38,9 +38,24 @@
                     <span>Drop Excel File or Click here to select file to upload.</span>
                     <input type="file" id="fileInput" name="file" class="dropzone-input" accept=".xlsx,.xls"/>
                 </div>
-
+                <div class="mode">
+                    <label>Mode</label>
+                    <div class="radio-options">
+                      <div>
+                        <label for="mode-visible">Visible</label>
+                        <input type="radio" id="mode-visible" name="mode" value="visible"/>
+                      </div>
+                      <div>
+                        <label for="mode-invisible">Invisible</label>
+                        <input type="radio" id="mode-invisible" name="mode" value="invisible" checked />
+                      </div>
+                    </div>
+                </div>
                 <button class="" id="submit" type="submit">Submit</button>
             </form>
+            <div>
+                <div id="response-logs" class="response-logs"></div>
+            </div>
             <div id="response"></div>
         </div>
 

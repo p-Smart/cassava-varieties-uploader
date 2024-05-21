@@ -4,7 +4,7 @@ const executablePath = `C:/Program Files/Google/Chrome/Application/chrome.exe`
 
 
 interface PupProps {
-  width: number; height: number;
+  width?: number; height?: number;
 }
 
 const connToPuppeteer = async ({width, height}: PupProps) => {

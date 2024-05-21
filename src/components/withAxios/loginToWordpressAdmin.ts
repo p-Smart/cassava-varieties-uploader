@@ -2,6 +2,8 @@ import axios from "axios"
 import error from "../../exceptions/throwError"
 import cookieArrToString from "../../utils/cookieArrToString"
 import { genRandomHeader } from "../../utils/random"
+import clientLog from "../../utils/clientLog"
+import { Request } from "express"
 
 axios.defaults.headers.common = {...axios.defaults.headers.common, ...genRandomHeader()}
 
@@ -9,12 +11,17 @@ interface ILogin {
     url: string;
     username: string;
     password: string;
+
+    req: Request;
 }
 
 const loginToWordpressAdmin = async ({
     url,
     username,
-    password
+    password,
+    
+
+    req,
 }: ILogin) => {
 
     // Set wordpress cookies
@@ -42,9 +49,13 @@ const loginToWordpressAdmin = async ({
         return realCookie.startsWith('wordpress_logged_in') && cookieVal.length > 10
     });
     
-    !isLoggedIn && error('Wordpress login failed')
 
-    console.log(`${username} logged in.`)
+    if(!isLoggedIn){
+        error('Wordpress login failed')
+    }
+
+    const msg1 = `${username} logged in.`
+    console.log(msg1, {cacheId: req.body.reqId})
     return cookieArrToString(cookies)
 }
 

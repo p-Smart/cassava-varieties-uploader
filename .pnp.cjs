@@ -45,6 +45,7 @@ const RAW_RUNTIME_STATE =
           ["jsdom", "virtual:f6045214a0693499cd794e6d4ee4d23a913af3f848659fb3827fa0eac2c4b80e0837b70dc3fb6b85ec3822474286fbe93d81c0bc5618c170d85a8173c256863e#npm:24.0.0"],\
           ["mongoose", "npm:7.6.11"],\
           ["multer", "npm:1.4.5-lts.1"],\
+          ["node-cache", "npm:5.1.2"],\
           ["nodemon", "npm:3.1.0"],\
           ["puppeteer-core", "npm:22.9.0"],\
           ["ts-node", "virtual:f6045214a0693499cd794e6d4ee4d23a913af3f848659fb3827fa0eac2c4b80e0837b70dc3fb6b85ec3822474286fbe93d81c0bc5618c170d85a8173c256863e#npm:10.9.2"],\
@@ -1008,6 +1009,15 @@ const RAW_RUNTIME_STATE =
           ["string-width", "npm:4.2.3"],\
           ["strip-ansi", "npm:6.0.1"],\
           ["wrap-ansi", "npm:7.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["clone", [\
+      ["npm:2.1.2", {\
+        "packageLocation": "../../../Users/Prince/AppData/Local/Yarn/Berry/cache/clone-npm-2.1.2-1d491c6629-10c0.zip/node_modules/clone/",\
+        "packageDependencies": [\
+          ["clone", "npm:2.1.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2105,6 +2115,7 @@ const RAW_RUNTIME_STATE =
           ["jsdom", "virtual:f6045214a0693499cd794e6d4ee4d23a913af3f848659fb3827fa0eac2c4b80e0837b70dc3fb6b85ec3822474286fbe93d81c0bc5618c170d85a8173c256863e#npm:24.0.0"],\
           ["mongoose", "npm:7.6.11"],\
           ["multer", "npm:1.4.5-lts.1"],\
+          ["node-cache", "npm:5.1.2"],\
           ["nodemon", "npm:3.1.0"],\
           ["puppeteer-core", "npm:22.9.0"],\
           ["ts-node", "virtual:f6045214a0693499cd794e6d4ee4d23a913af3f848659fb3827fa0eac2c4b80e0837b70dc3fb6b85ec3822474286fbe93d81c0bc5618c170d85a8173c256863e#npm:10.9.2"],\
@@ -2911,6 +2922,16 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../Users/Prince/AppData/Local/Yarn/Berry/cache/netmask-npm-2.0.2-2299510a4d-10c0.zip/node_modules/netmask/",\
         "packageDependencies": [\
           ["netmask", "npm:2.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["node-cache", [\
+      ["npm:5.1.2", {\
+        "packageLocation": "../../../Users/Prince/AppData/Local/Yarn/Berry/cache/node-cache-npm-5.1.2-f65482660d-10c0.zip/node_modules/node-cache/",\
+        "packageDependencies": [\
+          ["node-cache", "npm:5.1.2"],\
+          ["clone", "npm:2.1.2"]\
         ],\
         "linkType": "HARD"\
       }]\

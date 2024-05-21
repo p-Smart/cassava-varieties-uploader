@@ -1,19 +1,26 @@
+import { Request } from "express";
 import { Page } from "puppeteer-core"
 
 
 interface ILogin {
     page: Page;
+    url: string;
     username: string;
-    password: String;
+    password: string;
+
+    req: Request;
 }
 
 const login = async ({
     page,
+    url,
     username,
-    password
+    password,
+
+    req
 }: ILogin) => {
 
-    await page.goto('https://seedtracker.org/cassava/wp-login.php')
+    await page.goto(`${url}/wp-login.php`)
 
     await page.evaluate((username, password) => {
         const usernameInput = document.getElementById('user_login')
@@ -32,7 +39,10 @@ const login = async ({
 
     await page.waitForNavigation()
 
-    console.log('User logged in')
+    if(page.url().includes('/wp-login.php')){
+        throw new Error('Error logging in, check browser for more details.')
+    }
+    console.log('User logged in', {cacheId: req.body.reqId})
 }
 
 

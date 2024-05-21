@@ -6,12 +6,15 @@ form.addEventListener('submit', async function(event) {
     event.preventDefault();
     responseEl.textContent = ''
 
+    const reqId = crypto.randomUUID();
     const formData = new FormData(form);
-    const formDataObj = Object.fromEntries(formData.entries())
+    formData.append('reqId', reqId)
     let bodyData = {
         username: form.querySelector(`[name="username"]`).value,
         password: form.querySelector(`[name="password"]`).value,
-        data: ''
+        data: '',
+        reqId,
+        mode: Array.from(form.querySelectorAll(`[name="mode"]`)).find( input => input.checked ).value
     }
     
     const jsonInput = document.getElementById('jsonInput').value.trim();
@@ -52,8 +55,23 @@ form.addEventListener('submit', async function(event) {
     }
 
 
+    const checkForLogs =() => {
+        return setInterval( async () => {
+            const {data} = await axios.get(`/logs/${reqId}`)
+            const logs = data?.data
+
+            if(logs && logs.length){
+                const responseLogsEl = document.getElementById('response-logs')
+                responseLogsEl.style.display = 'block'
+                responseLogsEl.innerHTML = logs.join('<br>')
+                responseLogsEl.scrollIntoView()
+            }
+        }, 1000 )
+    }
     try{
         submitBtn.classList.add('loading')
+
+        var intervalId = checkForLogs();
 
         const {data} = await axios.post('/upload-cassava-varieties', jsonInput ? JSON.stringify(bodyData) : formData, {
             headers: {
@@ -77,12 +95,14 @@ form.addEventListener('submit', async function(event) {
     }   
     finally{
         submitBtn.classList.remove('loading')
+        console.log('Interval Id', intervalId)
+        clearInterval(intervalId)
     }
 });
 
 
 
-
+// Pretty Print
 document.getElementById('jsonInput').addEventListener('input', async (e) => {
     document.querySelector('.form-container pre').style.display = 'block'
     const value = e.target.value

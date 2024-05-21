@@ -6,16 +6,18 @@ const upload = multer({storage})
 
 import UploadCassavaVarietiesDto from './UploadCassavaVarieties/dto'
 import UploadCassavaVarieties from './UploadCassavaVarieties'
+import clientLog from '../utils/clientLog'
+import FetchLogs from './FetchLogs'
 
 const router = express.Router()
 
 
 router.post('/upload-cassava-varieties', upload.single('file'), UploadCassavaVarietiesDto, UploadCassavaVarieties)
 
+router.get('/logs/:id', FetchLogs)
 
 
-
-router.get('/test', async (_, res) => {
+router.get('/test', async (req, res) => {
     try{
       // const loginCookies = await loginToWordpressAdmin({
       //   url: 'https://seedtracker.org/newcassava',
