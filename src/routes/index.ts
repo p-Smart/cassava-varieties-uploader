@@ -21,14 +21,14 @@ router.get('/test', async (req, res) => {
     try{
       // const loginCookies = await loginToWordpressAdmin({
       //   url: 'https://seedtracker.org/newcassava',
-      //   username: 'princeayokunle2002@gmail.com',
-      //   password: 'PrAnnie_2018'
+      //   username: '',
+      //   password: ''
       // })
   
       // await uploadVariety({loginCookies})
       // var {browser, page} = await connToPuppeteer()
-      // const username = 'higboko'
-      // const password = 'iita@2023'
+      // const username = ''
+      // const password = ''
       
       // await login({page, username, password})
   
