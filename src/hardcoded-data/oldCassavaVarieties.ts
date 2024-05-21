@@ -370,4 +370,4 @@ const allVarieties =
     }
 ]
 
-module.exports = allVarieties
+export default allVarieties

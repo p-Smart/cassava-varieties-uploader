@@ -2912,4 +2912,4 @@ const productionData = [
     }
 ]
 
-module.exports = productionData
+export default productionData

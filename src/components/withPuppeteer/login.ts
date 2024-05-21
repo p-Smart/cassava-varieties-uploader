@@ -1,8 +1,17 @@
+import { Page } from "puppeteer-core"
+
+
+interface ILogin {
+    page: Page;
+    username: string;
+    password: String;
+}
+
 const login = async ({
     page,
     username,
     password
-}) => {
+}: ILogin) => {
 
     await page.goto('https://seedtracker.org/cassava/wp-login.php')
 
@@ -10,10 +19,10 @@ const login = async ({
         const usernameInput = document.getElementById('user_login')
         const passwordInput = document.getElementById('user_pass')
       
-        usernameInput.value = username;
+        usernameInput['value'] = username;
         usernameInput.dispatchEvent(new Event('input', { bubbles: true }));
   
-        passwordInput.value = password;
+        passwordInput['value'] = password;
         passwordInput.dispatchEvent(new Event('input', { bubbles: true }));
   
         let loginButton = document.getElementById(`wp-submit`)
@@ -27,4 +36,4 @@ const login = async ({
 }
 
 
-module.exports = login
+export default login

@@ -1,12 +1,18 @@
+import { Page } from "puppeteer-core"
+import { IVariety } from "../types";
 
 
-
+interface IUploadVariety {
+  page: Page;
+  variety: IVariety;
+  count?: number;
+}
 
 const uploadVariety = async ({
     page,
     variety,
     count,
-}) => {
+}: IUploadVariety) => {
     await page.goto('https://seedtracker.org/newcassava/wp-admin/post-new.php?post_type=variety')
 
     await Promise.race([
@@ -27,29 +33,29 @@ const uploadVariety = async ({
       const traitsInput = document.getElementById('post_wpcffeatured-traits')
       const detailsInput = document.getElementById('post_wpcfmore-details')
     
-      titleInput.value = title;
+      titleInput['value'] = title;
       titleInput.dispatchEvent(new Event('input', { bubbles: true }));
 
       document.getElementById('wpcf-fields-checkboxes-option-b1bc328ce47333eadb2434d8e0f12c6c-1').click();
 
-      vNameInput.value = title;
+      vNameInput['value'] = title;
       vNameInput.dispatchEvent(new Event('input', { bubbles: true }));
 
-      ognameInput.value = ogname;
+      ognameInput['value'] = ogname;
       ognameInput.dispatchEvent(new Event('input', { bubbles: true }));
 
-      yearInput.value = year;
+      yearInput['value'] = year;
       yearInput.dispatchEvent(new Event('input', { bubbles: true }));
 
-      traitsInput.value = traits;
+      traitsInput['value'] = traits;
       traitsInput.dispatchEvent(new Event('input', { bubbles: true }));
 
-      detailsInput.value = !details ? '' : `<a href="${details}" target="_blank" rel="noopener">More details</a>`;
+      detailsInput['value'] = !details ? '' : `<a href="${details}" target="_blank" rel="noopener">More details</a>`;
       detailsInput.dispatchEvent(new Event('input', { bubbles: true }));
 
       const traitsArr = traits.split(/,\s*|\s+and\s+/).map(text => text.toLowerCase().trim())
 
-      Array.from(document.querySelectorAll('#traitchecklist li')).map( (el) => {
+      Array.from(document.querySelectorAll('#traitchecklist li')).map( (el: any) => {
         const traitFrmCheckbox = el.innerText.toLowerCase().trim()
         const isTrait = traitsArr.some( (trait) => traitFrmCheckbox.includes( trait.slice(0,8) ) )
         isTrait && el.querySelector('input').click()
@@ -63,8 +69,8 @@ const uploadVariety = async ({
 
   await page.waitForNavigation()
 
-  console.log(`${count}. Uploaded ${variety['Original Name']}`)
+  console.log(`${count || 0}. Uploaded ${variety['Original Name']}`)
 }
 
 
-module.exports = uploadVariety
+export default uploadVariety

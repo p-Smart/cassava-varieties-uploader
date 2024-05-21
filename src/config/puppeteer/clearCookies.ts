@@ -1,8 +1,12 @@
+import { Page } from "puppeteer-core";
 
+interface IClearCookies {
+  page: Page
+}
 
 const clearCookies = async ({
     page,
-}) => {
+}: IClearCookies) => {
 
     const cookies = await page.cookies();
     
@@ -13,4 +17,4 @@ const clearCookies = async ({
     console.log('Cookies cleared')
 }
 
-module.exports = clearCookies
+export default clearCookies
