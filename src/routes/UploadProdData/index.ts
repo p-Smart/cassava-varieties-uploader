@@ -19,9 +19,8 @@ const UploadProdData = withErrorHandler(async (req, res) => {
     const visible = mode==='visible'
     
     if(!visible){
-        return {
-            message: 'Invisible mode has not been implemented yet.'
-        }
+        throw new Error('Invisible mode has not been implemented yet.')
+        
         const loginCookies = await loginAxios({
             url: 'https://seedtracker.org/cassava',
             username: dto.username,
