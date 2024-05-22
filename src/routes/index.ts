@@ -6,48 +6,22 @@ const upload = multer({storage})
 
 import UploadCassavaVarietiesDto from './UploadCassavaVarieties/dto'
 import UploadCassavaVarieties from './UploadCassavaVarieties'
-import clientLog from '../utils/clientLog'
 import FetchLogs from './FetchLogs'
+import UploadProdData from './UploadProdData'
+import UploadProdDataDto from './UploadProdData/dto'
 
 const router = express.Router()
 
 
 router.post('/upload-cassava-varieties', upload.single('file'), UploadCassavaVarietiesDto, UploadCassavaVarieties)
 
+router.post('/upload-prod-data', upload.single('file'), UploadProdDataDto, UploadProdData)
+
 router.get('/logs/:id', FetchLogs)
 
 
 router.get('/test', async (req, res) => {
     try{
-      // const loginCookies = await loginToWordpressAdmin({
-      //   url: 'https://seedtracker.org/newcassava',
-      //   username: '',
-      //   password: ''
-      // })
-  
-      // await uploadVariety({loginCookies})
-      // var {browser, page} = await connToPuppeteer()
-      // const username = ''
-      // const password = ''
-      
-      // await login({page, username, password})
-  
-      // let count = 10
-      
-      // for (const data of productionData.slice(count)){
-      //   await uploadProductionData({page, data, count})
-      //   ++count
-      // }
-  
-  
-      // for (const variety of allVarieties.slice(count)){
-      //   const newPage = await browser.newPage()
-      //   await setPageSettings(newPage, false)
-      //   await uploadVariety({page: newPage, variety, count})
-      //   await newPage.close()
-      //   ++count;
-      // }
-      
   
       return res.json({
         success: true,

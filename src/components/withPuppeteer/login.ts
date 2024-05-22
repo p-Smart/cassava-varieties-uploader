@@ -2,7 +2,7 @@ import { Request } from "express";
 import { Page } from "puppeteer-core"
 
 
-interface ILogin {
+interface ILoginPup {
     page: Page;
     url: string;
     username: string;
@@ -11,14 +11,14 @@ interface ILogin {
     req: Request;
 }
 
-const login = async ({
+const loginPup = async ({
     page,
     url,
     username,
     password,
 
     req
-}: ILogin) => {
+}: ILoginPup) => {
 
     await page.goto(`${url}/wp-login.php`)
 
@@ -46,4 +46,4 @@ const login = async ({
 }
 
 
-export default login
+export default loginPup

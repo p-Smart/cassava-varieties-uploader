@@ -72,7 +72,7 @@ const uploadVarietyPup = async ({
   }, variety['Variety Name'], variety['Original Name'], variety['Year of Release'], variety['Featured traits'], variety['More details'])
     
 
-  await page.waitForNavigation()
+  // await page.waitForNavigation()
 
   console.log(`${count || 0}. Uploaded ${variety['Original Name']}`, {cacheId: req.body.reqId})
 }

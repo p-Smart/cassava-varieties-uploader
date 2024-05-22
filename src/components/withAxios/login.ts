@@ -2,12 +2,11 @@ import axios from "axios"
 import error from "../../exceptions/throwError"
 import cookieArrToString from "../../utils/cookieArrToString"
 import { genRandomHeader } from "../../utils/random"
-import clientLog from "../../utils/clientLog"
 import { Request } from "express"
 
 axios.defaults.headers.common = {...axios.defaults.headers.common, ...genRandomHeader()}
 
-interface ILogin {
+interface ILoginAxios {
     url: string;
     username: string;
     password: string;
@@ -15,14 +14,14 @@ interface ILogin {
     req: Request;
 }
 
-const loginToWordpressAdmin = async ({
+const loginAxios = async ({
     url,
     username,
     password,
     
 
     req,
-}: ILogin) => {
+}: ILoginAxios) => {
 
     // Set wordpress cookies
     const {headers: initialLoadHeaders} = await axios.get(`${url}/wp-login.php`)
@@ -60,4 +59,4 @@ const loginToWordpressAdmin = async ({
 }
 
 
-export default loginToWordpressAdmin
+export default loginAxios

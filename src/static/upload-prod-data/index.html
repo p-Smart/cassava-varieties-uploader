@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Data Uploader</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/pretty-print-json@3.0/dist/css/pretty-print-json.css>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Production Data Uploader</h2>
+            <form id="uploadForm" method="POST" enctype="multipart/form-data">
+                <div>
+                    <div>
+                        <label for="username">Username</label>
+                        <input id="username" name="username" placeholder="Your wordpress username" />
+
+                        <label for="password">Password</label>
+                        <input id="password" name="password" type="password" placeholder="Your wordpress password" />
+
+                        <label for="jsonInput">JSON Array:</label>
+                        <textarea id="jsonInput" name="jsonInput" placeholder="Enter JSON array here..."></textarea>
+                    </div>
+                    <pre class=json-container></pre>
+                </div>
+
+                <p style="text-align: center; padding-bottom: 20px;">OR</p>
+
+                <!-- <label for="fileInput">Upload Excel File:</label> -->
+                <div class="dropzone" id="dropzone">
+                    <img class="dropzone-icon" src="https://wickedev.com/wp-content/uploads/2021/02/cloud-uploading.png" />
+                    
+                    <span>Drop Excel File or Click here to select file to upload.</span>
+                    <input type="file" id="fileInput" name="file" class="dropzone-input" accept=".xlsx,.xls"/>
+                </div>
+                <div class="mode">
+                    <label>Upload Mode</label>
+                    <div class="radio-options">
+                      <div>
+                        <label for="mode-visible">Visible</label>
+                        <input type="radio" id="mode-visible" name="mode" value="visible"/>
+                      </div>
+                      <div>
+                        <label for="mode-invisible">Invisible</label>
+                        <input type="radio" id="mode-invisible" name="mode" value="invisible" checked />
+                      </div>
+                    </div>
+                </div>
+                <button class="" id="submit" type="submit">Submit</button>
+            </form>
+            <div>
+                <div id="response-logs" class="response-logs"></div>
+            </div>
+            <div id="response"></div>
+        </div>
+
+        <div class="note">
+            <h4>Usage:</h4>
+            <div>
+                <h5>For JSON Array</h5>
+                <p>An array of objects with the keys below is expected:</p>
+<pre class=json-container>
+{
+    "Title": "string",
+    "Country": "string",
+    "Name": "string",
+    "Organization": "string",
+    "Address": "string",
+    "Location": "string",
+    "Variety": "string",
+    "Variety Details": "string",
+    "Type of Seed": "string",
+    "Date of planting": "string",
+    "Size of Field": "string",
+    "Production Year": "string",
+    "Phone": "string",
+    "Email": "string"
+}
+</pre>
+            </div>
+    
+            <div>
+                <h5>For Excel File,</h5>
+                <p>Rename the sheet containing the data to be uploaded to data.<br>
+                The first row must contain the following headings: "Title", "Country", "Name", "Organization", "Address", "Location", "Variety", "Variety Details", "Type of Seed", "Date of planting", "Size of Field", "Production Year", "Phone", and "Email"
+                </p>
+            </div>
+    
+            <p class="important">All keys are case-sensitive.</p>
+        </div>
+    </div>
+
+
+
+    <script src=https://cdn.jsdelivr.net/npm/pretty-print-json@3.0/dist/pretty-print-json.min.js></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.0/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

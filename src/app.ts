@@ -2,7 +2,7 @@ require('dotenv').config()
 import express from 'express'
 const app = express()
 import path from 'path'
-import routes from './routes'
+import serverRoutes from './routes'
 import cookieParser from 'cookie-parser'
 import NotFound from './routes/404'
 import NodeCache from 'node-cache'
@@ -23,26 +23,21 @@ console.log = (...args: unknown[]) => {
     originalConsoleLog(...args)
 }
 
-const appRoot = path.resolve(__dirname)
+export const appRoot = path.resolve(__dirname)
 app.use(cookieParser())
 app.use(express.json({limit: '50mb'}))
 app.use(express.urlencoded({extended: false}))
-app.use('/client', (req, res, next) => {
-  next();
-}, express.static(path.join(appRoot, '/client')));
+app.use('/', express.static(path.join(appRoot, '/static')))
 
 
-app.use('', routes)
-
-
-
-
+app.use('/api', serverRoutes)
+app.use(NotFound)
 
 
 
 const startServer = async () => {
   try{
-    app.listen(process.env.PORT || 8008, () => console.log(`Server running...`, {cacheId: 10111}))
+    app.listen(process.env.PORT || 8008, () => console.log(`Server running...`))
   }
   catch(err){
     console.log(err.message)
@@ -50,8 +45,3 @@ const startServer = async () => {
 }
 
 startServer()
-
-
-
-
-app.use(NotFound)

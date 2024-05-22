@@ -1,10 +1,13 @@
 const form = document.getElementById('uploadForm')
 form.addEventListener('submit', async function(event) {
     const responseEl = document.getElementById('response')
+    const responseLogsEl = document.getElementById('response-logs')
     const submitBtn = document.getElementById('submit')
 
     event.preventDefault();
     responseEl.textContent = ''
+    responseLogsEl.innerHTML = ''
+    responseLogsEl.style.display = 'none'
 
     const reqId = crypto.randomUUID();
     const formData = new FormData(form);
@@ -19,7 +22,6 @@ form.addEventListener('submit', async function(event) {
     
     const jsonInput = document.getElementById('jsonInput').value.trim();
     const fileInput = document.getElementById('fileInput').files[0];
-    console.log(fileInput)
 
     let isJsonValid = false;
 
@@ -57,11 +59,10 @@ form.addEventListener('submit', async function(event) {
 
     const checkForLogs =() => {
         return setInterval( async () => {
-            const {data} = await axios.get(`/logs/${reqId}`)
+            const {data} = await axios.get(`/api/logs/${reqId}`)
             const logs = data?.data
 
             if(logs && logs.length){
-                const responseLogsEl = document.getElementById('response-logs')
                 responseLogsEl.style.display = 'block'
                 responseLogsEl.innerHTML = logs.join('<br>')
                 responseLogsEl.scrollIntoView()
@@ -73,7 +74,7 @@ form.addEventListener('submit', async function(event) {
 
         var intervalId = checkForLogs();
 
-        const {data} = await axios.post('/upload-cassava-varieties', jsonInput ? JSON.stringify(bodyData) : formData, {
+        const {data} = await axios.post('/api/upload-cassava-varieties', jsonInput ? JSON.stringify(bodyData) : formData, {
             headers: {
                 ...jsonInput && {
                     'Content-Type': 'application/json'
@@ -95,8 +96,9 @@ form.addEventListener('submit', async function(event) {
     }   
     finally{
         submitBtn.classList.remove('loading')
-        console.log('Interval Id', intervalId)
-        clearInterval(intervalId)
+        setTimeout( () => {
+            clearInterval(intervalId)
+        }, 1000 )
     }
 });
 

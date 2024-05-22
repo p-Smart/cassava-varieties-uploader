@@ -1,18 +1,23 @@
 import { Page } from "puppeteer-core"
 import { IProductionData } from "../types";
+import { Request } from "express";
 
 
-interface IUploadProductionData {
+interface IUploadProdDataPup {
   page: Page;
-  data: IProductionData,
+  data: IProductionData;
   count?: number;
+
+  req: Request;
 }
 
-const uploadProductionData = async ({
+const uploadProdDataPup = async ({
     page,
     data,
     count,
-}: IUploadProductionData) => {
+
+    req,
+}: IUploadProdDataPup) => {
     await page.goto('https://seedtracker.org/cassava/wp-admin/post-new.php?post_type=production-field')
     
     const field = data
@@ -106,8 +111,8 @@ const uploadProductionData = async ({
 
   await page.waitForNavigation()
 
-  console.log(`${count || 0}. Uploaded ${field.Title}`)
+  console.log(`${count || 0}. Uploaded ${field.Title}`, {cacheId: req.body.reqId})
 }
 
 
-export default uploadProductionData
+export default uploadProdDataPup

@@ -2,17 +2,27 @@ import { body } from "express-validator"
 import excelToJson from 'convert-excel-to-json'
 import path from "path"
 import objectify from "../../utils/objectify"
+import { captureRejectionSymbol } from "events"
 
 const requiredKeys = [
-    "Variety Name",
-    "Original Name",
-    "Year of Release",
-    "Featured traits",
-    "More details"
+    "Title",
+    "Country",
+    "Name",
+    "Organization",
+    "Address",
+    "Location",
+    "Variety",
+    "Variety Details",
+    "Type of Seed",
+    "Date of planting",
+    "Size of Field",
+    "Production Year",
+    "Phone",
+    "Email"
 ]
 
 
-const UploadCassavaVarietiesDto = [
+const UploadProdDataDto = [
     body('username')
     .notEmpty()
     .withMessage('Username cannot be empty'),
@@ -70,6 +80,7 @@ const UploadCassavaVarietiesDto = [
                 source: file.buffer,
                 sheets: ['data'],
             })
+
             const data = result.data
             if(!data || !data.length){
                 throw new Error('Excel file does not have a `data` sheet.')
@@ -102,4 +113,4 @@ const UploadCassavaVarietiesDto = [
 ]
 
 
-export default UploadCassavaVarietiesDto
+export default UploadProdDataDto
