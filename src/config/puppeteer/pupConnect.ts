@@ -5,14 +5,15 @@ const executablePath = `C:/Program Files/Google/Chrome/Application/chrome.exe`
 
 interface PupProps {
   width?: number; height?: number;
+  noPage?: boolean;
 }
 
-const connToPuppeteer = async ({width, height}: PupProps) => {
+const connToPuppeteer = async (props: PupProps = {}) => {
   
   const browser = await pup.launch({
       headless: process.env.DEV ? false : 'shell',
       executablePath: executablePath,
-      defaultViewport: { width: width || 1536, height: height || 800 },
+      defaultViewport: { width: props.width || 1536, height: props.height || 800 },
       // devtools: process.env.DEV ? true : false,
       // args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-web-security',],
   })
