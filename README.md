@@ -4,7 +4,7 @@ Welcome to **Uploader**! This project allows you to easily upload bulk data into
 
 ## Front Page
 
-You can access the front page of the application by clicking [here](https://localhost:8008).
+You can access the front page of the application by clicking [here](http://localhost:8008).
 
 ## Features
 
@@ -31,11 +31,11 @@ To get started with the project, follow these steps:
     ```sh
     yarn dev
     ```
-5. Open your browser and go to [https://localhost:8008](https://localhost:8008).
+5. Open your browser and go to [http://localhost:8008](http://localhost:8008).
 
 ## Usage
 
-1. Open the [front page](https://localhost:8008).
+1. Open the [front page](http://localhost:8008).
 2. Choose from the different post types.
 3. Submit Excel file or JSON, then click the "Upload" button to upload your data.
 
