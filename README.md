@@ -21,7 +21,7 @@ To get started with the project, follow these steps:
     ```
 2. Navigate to the project directory:
     ```sh
-    cd uploader
+    cd [project-root-path]
     ```
 3. Install the dependencies:
     ```sh
