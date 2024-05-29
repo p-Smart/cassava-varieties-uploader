@@ -1,6 +1,6 @@
-# Uploader
+# Wordpress Uploader
 
-Welcome to **Uploader**! This project allows you to easily upload bulk data into specific WordPress `post` types.
+Welcome to **Wordpress Uploader**! This project allows you to easily upload bulk data into specific WordPress `post` types.
 
 ## Front Page
 
