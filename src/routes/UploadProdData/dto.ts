@@ -2,7 +2,6 @@ import { body } from "express-validator"
 import excelToJson from 'convert-excel-to-json'
 import path from "path"
 import objectify from "../../utils/objectify"
-import { captureRejectionSymbol } from "events"
 
 const requiredKeys = [
     "Title",
@@ -86,14 +85,13 @@ const UploadProdDataDto = [
                 throw new Error('Excel file does not have a `data` sheet.')
             }
             
-            const headers = Object.values(data[0] as {[key: string]: any})
+            const headers = Object.entries(data[0] as {[key: string]: any})
 
             const formattedData = data.slice(1).map(row => {
                 const rowObject = {}
-                const rowArr = Object.keys(row)
                 
                 headers.forEach( (header, index) => {
-                    rowObject[header] = row[rowArr[index]] || ''
+                    rowObject[header[1]] = row[header[0]] || ''
                 } )
                 return rowObject
             })
